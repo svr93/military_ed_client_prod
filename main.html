@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Центр контроля</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,maximum-scale=0.45">
+
+    <meta name="application-name" content="ControlCenter__v3.0">
+    <meta name="author" content="Vladimir Shamsheev, svr93@i.ua">
+
+    <style>body{text-align:center}header{margin:auto;width:90%;height:45px;border:2px solid green}form{text-align:left}input{margin:25px;width:25px;height:25px}button{height:50px;border-radius:25px}.container{display:inline-block;vertical-align:top;width:600px;height:600px;border:2px solid green}.button-block{height:50px}</style><script>"use strict";function init(){document.addEventListener("DOMContentLoaded",function(){initEarthDrawingSettings(),reduceScale.onclick=function(){changeScale(-.025)},increaseScale.onclick=function(){changeScale(.025)},startButton.onclick=function(){this.style.display="none",send()};var n=document.getElementsByClassName("container");[].forEach.call(n,function(n){n.style.display="inline-block"}),buttonContainer.style.display="block"})}var isSystemWorking=!0;</script><script defer="defer" src="js/main.js" onload="init()"></script></head><body ng-app="app">
+
+    <header>
+      <h1>Центр контроля космической обстановки</h1>
+    </header>
+
+    <div ng-controller="EarthViewController as ewc">
+      <canvas id="earthCnv" class="container" style="display:none" ng-show="ewc.isSet(0)"></canvas><canvas id="earth2DCnv" class="container" style="display:none" ng-show="ewc.isSet(1)"></canvas><div class="container" ng-show="ewc.isSet(2)">
+        <div id="coords"></div>
+      </div><div class="container" ng-show="ewc.isSet(3)">
+        <article>
+          <h2>Инструкция</h2>
+        </article>
+      </div><div class="container">
+        <div id="info_block" style="height:50px"></div>
+
+        <div id="buttonContainer" style="display:none;margin:auto;width:50%">
+          <div class="button-block">
+            <button id="reduceScale" style="width:50%" ng-show="ewc.isSet(0)">
+              scale-
+            </button><button id="increaseScale" style="width:50%" ng-show="ewc.isSet(0)">
+              scale+
+            </button>
+          </div>
+          <br>
+          <br>
+          <button disabled="true" id="startButton" style="width:100%">
+            Старт
+          </button>
+          <br>
+          <br>
+          <form>
+            <input type="radio" name="earthView" ng-model="ewc.view" value="0">
+              3D-изображение Земли
+            <br>
+            <input type="radio" name="earthView" ng-model="ewc.view" value="1">
+              2D-карта Земли
+            <br>
+            <input type="radio" name="earthView" ng-model="ewc.view" value="2">
+              Список координат
+            <br>
+            <input type="radio" name="earthView" ng-model="ewc.view" value="3">
+              Инструкция
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <link rel="stylesheet" href="css/main.css">
+</html>
